@@ -1,21 +1,16 @@
 FROM python:3.9
 
 #
-WORKDIR /code
+WORKDIR /app
 
 #
-COPY ./requirements.txt /code/requirements.txt
+COPY ./requirements.txt /app/requirements.txt
 
 #
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+RUN pip install -r /app/requirements.txt
 
 #
-COPY . .
+COPY . ./
 
 #
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
-
-
-# 도커세팅 참고
-# https://malwareanalysis.tistory.com/139
-# https://fastapi.tiangolo.com/deployment/docker/
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
